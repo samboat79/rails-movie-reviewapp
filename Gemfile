@@ -72,4 +72,6 @@ group :production do
 end
 
 
+gem 'gravtastic'
+
 
