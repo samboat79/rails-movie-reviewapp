@@ -63,3 +63,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap-sass'
 gem "aws-sdk-s3", require: false
+
+group :test, :development do
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+end
+
+
+
