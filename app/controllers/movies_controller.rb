@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:show, :index]
+
 
   # GET /movies
   # GET /movies.json
@@ -11,7 +12,7 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @review = Review.new 
+    @review = Review.new
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
 
     if @reviews.blank?
@@ -19,9 +20,6 @@ class MoviesController < ApplicationController
     else
       @avg_review = @reviews.average(:rating).round(2)
     end
-  end
-    
-    
   end
 
   # GET /movies/new
@@ -82,5 +80,5 @@ class MoviesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def movie_params
       params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :actors, :image, :user_id)
-  
+    end
 end
